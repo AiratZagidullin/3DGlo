@@ -1,1 +1,1 @@
-console.log("true");
+(()=>{"use strict";console.log("one"),console.log("two")})();
