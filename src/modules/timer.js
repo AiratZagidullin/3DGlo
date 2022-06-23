@@ -17,23 +17,17 @@ const timer = (deadline) => {
     const updateClock = () => {
         let getTime = getTimeRemaining()
 
-        if (getTime.hours < 10) {
-            timerHours.textContent = '0' + getTime.hours
-        } else {
-            timerHours.textContent = getTime.hours
+        const plusNull = (time, position) => {
+            if (time < 10) {
+                position.textContent = '0' + time
+            } else {
+                position.textContent = time
+            }
         }
 
-        if (getTime.minutes < 10) {
-            timerMinutes.textContent = '0' + getTime.minutes
-        } else {
-            timerMinutes.textContent = getTime.minutes
-        }
-
-        if (getTime.seconds < 10) {
-            timerSeconds.textContent = '0' + getTime.seconds
-        } else {
-            timerSeconds.textContent = getTime.seconds
-        }
+        plusNull(getTime.hours, timerHours);
+        plusNull(getTime.minutes, timerMinutes);
+        plusNull(getTime.seconds, timerSeconds);
 
         if (getTime.timeRemaining < 0) {
             clearInterval(idInterval)
