@@ -1,42 +1,52 @@
 const menu = () => {
+    const body = document.querySelector('body')
     const menuBtn = document.querySelector('.menu')
     const menu = document.querySelector('menu')
     const closeBtn = menu.querySelector('.close-btn')
     const menuItems = menu.querySelectorAll('ul>li>a')
     const mainLink = document.querySelector('main>a')
 
-    const handleMenu = () => {
-        menu.classList.toggle('active-menu')
-    }
+    // const handleMenu = () => {
+    //     menu.classList.toggle('active-menu')
+    // }
 
-    menuBtn.addEventListener('click', handleMenu)
-    closeBtn.addEventListener('click', handleMenu)
+    // menuBtn.addEventListener('click', handleMenu)
+    // closeBtn.addEventListener('click', handleMenu)
 
-    menuItems.forEach(menuItem => {
-        menuItem.addEventListener('click', (event) => {
-            handleMenu() //усложненное задание
-            event.preventDefault(); //усложненное задание
+    // menuItems.forEach(menuItem => {
+    //     menuItem.addEventListener('click', handleMenu)
+    // });
 
-            let href = menuItem.getAttribute('href').substring(1); //усложненное задание
-            const scrollTarget = document.getElementById(href) //усложненное задание
-            const elementPosition = scrollTarget.getBoundingClientRect().top; //усложненное задание
+    body.addEventListener('click', (e) => {
+        if (e.target.closest('.menu')) {
+            menu.classList.toggle('active-menu')
+        } else if (e.target.closest('main>a')) {
+            e.preventDefault();
 
-            window.scrollBy({ //усложненное задание
+            const scrollTarget = document.getElementById('service-block');
+            const elementPosition = scrollTarget.getBoundingClientRect().top;
+
+            window.scrollBy({
                 top: elementPosition,
                 behavior: "smooth"
             })
-        })
-    });
+        }
 
-    mainLink.addEventListener('click', (event) => {  //усложненное задание
-        const scrollTarget = document.getElementById('service-block')
-        const elementPosition = scrollTarget.getBoundingClientRect().top;
-        event.preventDefault();
+        if (e.target.classList.contains('close-btn') || (!e.target.closest('.menu') && !e.target.closest('menu'))) {
+            menu.classList.remove('active-menu')
+        } else if (e.target.closest('menu>ul>li>a')) {
+            menu.classList.remove('active-menu')
+            e.preventDefault();
 
-        window.scrollBy({
-            top: elementPosition,
-            behavior: "smooth"
-        })
+            let href = e.target.getAttribute('href').substring(1);
+            const scrollTarget = document.getElementById(href);
+            const elementPosition = scrollTarget.getBoundingClientRect().top;
+
+            window.scrollBy({
+                top: elementPosition,
+                behavior: "smooth"
+            })
+        }
     })
 }
 
