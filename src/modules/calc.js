@@ -29,7 +29,7 @@ const calc = (price = 100) => {
         if (calcType.value && calcSquare.value) {
             totalValue = price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue
             animate({ // усложненное
-                duration: 1000,
+                duration: 500,
                 timing(timeFraction) {
                     return timeFraction;
                 },
