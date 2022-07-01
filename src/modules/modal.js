@@ -1,22 +1,9 @@
+import { animate } from './helpers'
+
 const modal = () => {
     const modal = document.querySelector('.popup')
     const buttons = document.querySelectorAll('.popup-btn')
     const modalContent = modal.querySelector('.popup-content')
-
-    let count = -100
-    let animationId
-
-    const modalAnimate = () => {
-        count += 5
-        animationId = requestAnimationFrame(modalAnimate)
-        modal.style.display = 'block'
-
-        if (count <= 10) {
-            modalContent.style.top = count + '%'
-        } else {
-            cancelAnimationFrame(animationId)
-        }
-    }
 
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -24,7 +11,16 @@ const modal = () => {
                 modalContent.style.top = 10 + '%'
                 modal.style.display = 'block'
             } else {
-                modalAnimate()
+                animate({
+                    duration: 500,
+                    timing(timeFraction) {
+                        return timeFraction;
+                    },
+                    draw(progress) {
+                        modal.style.display = 'block'
+                        modalContent.style.top = (10 * progress) + '%';
+                    }
+                });
             }
         })
     });
@@ -32,8 +28,6 @@ const modal = () => {
     modal.addEventListener('click', (e) => {
         if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
             modal.style.display = 'none'
-            count = -100
-            modalContent.style.top = -100 + '%'
         }
     })
 }

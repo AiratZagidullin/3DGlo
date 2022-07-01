@@ -1,3 +1,5 @@
+import { animate } from "./helpers"
+
 const calc = (price = 100) => {
     const calcBlock = document.querySelector('.calc-block')
     const calcType = document.querySelector('.calc-type')
@@ -13,7 +15,6 @@ const calc = (price = 100) => {
         let totalValue = 0
         let calcCountValue = 1
         let calcDayValue = 1
-        let count = 0; // Усложненное
 
         if (calcCount.value > 1) {
             calcCountValue += + (calcCount.value / 10)
@@ -25,27 +26,20 @@ const calc = (price = 100) => {
             calcDayValue = 1.5
         }
 
-        const animate = (num) => {   // Усложненное 
-            let interval = setInterval(() => {
-                if (!(calcType.value && calcSquare.value)) {
-                    clearInterval(interval);
-                }
-
-                if (count < num) {
-                    count += 1;
-                    total.innerHTML = count;
-                } else {
-                    clearInterval(interval);
-                    total.innerHTML = num
-                }
-            }, 10);
-        }
-
         if (calcType.value && calcSquare.value) {
             totalValue = price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue
-            animate(totalValue); // Усложненное
+            animate({ // усложненное
+                duration: 1000,
+                timing(timeFraction) {
+                    return timeFraction;
+                },
+                draw(progress) {
+                    total.innerHTML = Math.floor(totalValue * progress);
+                }
+            });
         } else {
             totalValue = 0
+            total.innerHTML = 0;
         }
     }
 
