@@ -9,12 +9,22 @@ const validation = () => {
         element.forEach(input => {
             input.addEventListener('input', (e) => {
                 e.target.value = e.target.value.replace(reg, "")
+                if (e.target.value === '') {
+                    e.target.classList.remove('success')
+                } else {
+                    e.target.classList.add('success')
+                }
             })
         })
     ]
 
     messInput.addEventListener('input', (e) => {
         e.target.value = e.target.value.replace(/[^а-яА-Я\s\-]+/, "")
+        if (e.target.value === '') {
+            e.target.classList.remove('success')
+        } else {
+            e.target.classList.add('success')
+        }
     })
 
     valid(priceInputs, /\D+/)
