@@ -12,8 +12,12 @@ const slider = () => {
         let dotList = document.createElement("ul")
         dotList.classList.add('portfolio-dots')
         sliderBlock.append(dotList)
+        let dot = document.createElement("li")
+        dot.classList.add('dot')
+        dot.classList.add('dot-active')
+        dotList.append(dot)
 
-        for (let i = 0; i < slides.length; i++) {
+        for (let i = 0; i < slides.length - 1; i++) {
             let dot = document.createElement("li")
             dot.classList.add('dot')
             dotList.append(dot)

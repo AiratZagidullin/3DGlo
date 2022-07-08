@@ -1,5 +1,6 @@
 const sendForm = ({ formId, someElem = [] }) => {
     const form = document.getElementById(formId)
+    const formElements = form.querySelectorAll('input')
     const statusBlock = document.createElement('div')
     const loadText = 'Загрузка...'
     const errorText = 'Ошибка...'
@@ -28,7 +29,6 @@ const sendForm = ({ formId, someElem = [] }) => {
     }
 
     const submitForm = () => {
-        const formElements = form.querySelectorAll('input')
         const formData = new FormData(form)
         const formBody = {}
 
@@ -73,7 +73,6 @@ const sendForm = ({ formId, someElem = [] }) => {
         if (!form) {
             throw new Error('Форма отсутствует')
         }
-
         form.addEventListener('submit', (event) => {
             event.preventDefault()
 
@@ -83,5 +82,6 @@ const sendForm = ({ formId, someElem = [] }) => {
         console.log(error.message)
     }
 }
+
 
 export default sendForm
