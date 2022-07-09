@@ -13,8 +13,6 @@ const validation = () => {
                     e.target.classList.remove('success')
                 } else if (testReg.test(e.target.value)) {
                     e.target.classList.add('success')
-                } else {
-                    e.target.classList.remove('success')
                 }
             })
         })

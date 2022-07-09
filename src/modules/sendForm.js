@@ -33,6 +33,7 @@ const sendForm = ({ formId, someElem = [] }) => {
         const formBody = {}
 
         statusBlock.textContent = loadText
+        statusBlock.style.color = 'yellow'
         form.append(statusBlock)
 
         formData.forEach((val, key) => {
@@ -59,9 +60,11 @@ const sendForm = ({ formId, someElem = [] }) => {
                         input.classList.remove('success')
                     })
                     statusBlock.textContent = successText
+                    statusBlock.style.color = 'green'
                 })
                 .catch(error => {
                     statusBlock.textContent = errorText
+                    statusBlock.style.color = 'red'
                 })
         } else {
             alert('Данные не валидны')
